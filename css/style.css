@@ -1,0 +1,379 @@
+/* ==============================
+   Variables
+============================== */
+:root {
+  --pink:        #FF4DAD;
+  --pink-dark:   #CC0080;
+  --green:       #00C951;
+  --green-dark:  #007A30;
+  --yellow:      #FFE600;
+  --black:       #0a0a0a;
+  --white:       #ffffff;
+  --cream:       #FFFDE7;
+  --shadow:      4px 4px 0 #0a0a0a;
+  --shadow-sm:   3px 3px 0 #0a0a0a;
+  --border:      3px solid #0a0a0a;
+}
+
+/* ==============================
+   Reset & Base
+============================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--cream);
+  color: var(--black);
+  overflow-x: hidden;
+  line-height: 1.65;
+}
+
+/* ==============================
+   Floating Background Elements
+============================== */
+.floaters {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.floater {
+  position: absolute;
+  opacity: 0.12;
+  animation: floatUp linear infinite;
+  user-select: none;
+  line-height: 1;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(110vh) rotate(0deg);   }
+  to   { transform: translateY(-15vh) rotate(720deg); }
+}
+
+/* ==============================
+   Hero
+============================== */
+.hero {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 5rem 2rem 6rem;
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      rgba(0,0,0,0.07) 0px,  rgba(0,0,0,0.07) 2px,
+      transparent 2px, transparent 18px
+    ),
+    linear-gradient(150deg, #004d1a 0%, var(--green-dark) 45%, #009933 100%);
+  border-bottom: 6px solid var(--black);
+  overflow: hidden;
+}
+
+/* Rainbow strip at hero bottom */
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--pink) 0px,    var(--pink) 40px,
+    var(--yellow) 40px, var(--yellow) 80px,
+    var(--green) 80px,  var(--green) 120px,
+    var(--black) 120px, var(--black) 160px
+  );
+}
+
+.wave-bottom { display: none; } /* replaced by ::after strip */
+
+.hero-inner { position: relative; max-width: 700px; }
+
+.hero-melon {
+  display: block;
+  font-size: clamp(5rem, 18vw, 9rem);
+  margin-bottom: 1rem;
+  animation: wobble 3s ease-in-out infinite;
+  cursor: default;
+}
+
+@keyframes wobble {
+  0%, 100% { transform: rotate(-5deg) scale(1);    }
+  30%       { transform: rotate(4deg) scale(1.08);  }
+  60%       { transform: rotate(-3deg) scale(1.04); }
+}
+
+.hero-melon.pop { animation: pop 0.35s ease forwards; }
+
+@keyframes pop {
+  0%   { transform: scale(1) rotate(0deg);     }
+  50%  { transform: scale(1.4) rotate(18deg);  }
+  100% { transform: scale(1) rotate(0deg);     }
+}
+
+.hero h1 {
+  font-family: 'Fredoka One', Impact, sans-serif;
+  font-size: clamp(3.2rem, 12vw, 7rem);
+  color: var(--pink);
+  -webkit-text-stroke: 2px var(--black);
+  text-stroke: 2px var(--black);
+  text-shadow: 5px 5px 0 var(--black);
+  line-height: 1.0;
+  margin-bottom: 2rem;
+  letter-spacing: 1px;
+}
+
+.hero-details {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 1.75rem;
+}
+
+.hero-details span {
+  background: var(--yellow);
+  color: var(--black);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  border: var(--border);
+  box-shadow: var(--shadow);
+  letter-spacing: 0.01em;
+}
+
+.hero-sub {
+  color: var(--white);
+  font-size: 1.15rem;
+  font-style: italic;
+  line-height: 1.5;
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+}
+
+/* ==============================
+   Content Sections
+============================== */
+.content-section {
+  position: relative;
+  z-index: 1;
+  background: var(--green);
+  border-bottom: 5px solid var(--black);
+}
+
+.content-section.bg-alt {
+  background: var(--pink);
+}
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  padding: 6rem clamp(1.5rem, 8%, 5rem);
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.split-reversed .split-graphic { order: -1; }
+
+.split-text h2 {
+  font-family: 'Fredoka One', Impact, sans-serif;
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  color: var(--black);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+/* Cross-color text shadows for 90s pop */
+.content-section:not(.bg-alt) .split-text h2 {
+  text-shadow: 3px 3px 0 var(--pink);
+}
+
+.content-section.bg-alt .split-text h2 {
+  text-shadow: 3px 3px 0 var(--yellow);
+}
+
+.split-text p {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--black);
+  margin-bottom: 0.8rem;
+}
+
+.split-text p:last-child { margin-bottom: 0; }
+
+.split-graphic {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.melon-svg {
+  width: 100%;
+  max-width: 420px;
+  filter: drop-shadow(5px 5px 0 var(--black));
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.melon-svg:hover {
+  filter: drop-shadow(7px 7px 0 var(--black));
+  transform: scale(1.05) rotate(2deg);
+}
+
+.melon-svg--flip            { transform: scaleX(-1); }
+.melon-svg--flip:hover      { transform: scaleX(-1) scale(1.05) rotate(-2deg); }
+
+/* ==============================
+   FAQ
+============================== */
+.faq-section {
+  position: relative;
+  z-index: 1;
+  background: var(--cream);
+  padding: 6rem clamp(1.5rem, 8%, 5rem);
+  border-bottom: 5px solid var(--black);
+}
+
+.faq-inner {
+  max-width: 840px;
+  margin: 0 auto;
+}
+
+.faq-section h2 {
+  font-family: 'Fredoka One', Impact, sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  color: var(--black);
+  text-align: center;
+  text-shadow: 4px 4px 0 var(--pink);
+  margin-bottom: 3rem;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.faq-item {
+  border: var(--border);
+  border-radius: 6px;
+  background: var(--green);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+
+.faq-item[open] {
+  box-shadow: 6px 6px 0 var(--black);
+  transform: translate(-1px, -1px);
+}
+
+.faq-item[open] .faq-a { background: var(--pink); }
+
+.faq-q {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.4rem;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--black);
+  list-style: none;
+}
+
+.faq-q::-webkit-details-marker { display: none; }
+
+.faq-q::after {
+  content: '+';
+  font-size: 1.5rem;
+  font-weight: 300;
+  font-family: monospace;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.faq-item[open] .faq-q::after { transform: rotate(45deg); }
+
+.faq-a p {
+  padding: 0.75rem 1.4rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.65;
+  border-top: 2px dashed var(--black);
+}
+
+/* ==============================
+   Footer
+============================== */
+footer {
+  position: relative;
+  z-index: 1;
+  background: var(--black);
+  color: var(--white);
+  text-align: center;
+  padding: 5rem 2rem;
+  border-top: 6px solid var(--green);
+}
+
+.footer-emoji {
+  display: block;
+  font-size: 3.5rem;
+  margin-bottom: 1.25rem;
+  animation: spin 7s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+footer p {
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.6;
+  margin-bottom: 0.4rem;
+  color: var(--yellow);
+  text-shadow: 2px 2px 0 var(--green-dark);
+}
+
+.footer-details {
+  font-size: 0.9rem;
+  font-weight: 600;
+  opacity: 0.6;
+  letter-spacing: 0.1em;
+  color: var(--white);
+  text-shadow: none;
+  margin-top: 0.75rem;
+}
+
+/* ==============================
+   Responsive
+============================== */
+@media (max-width: 780px) {
+  .split {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding: 4rem 5%;
+  }
+
+  .split-reversed .split-graphic { order: 0; }
+
+  .melon-svg { max-width: 280px; }
+
+  .hero-details { gap: 0.5rem; }
+
+  .hero h1 {
+    -webkit-text-stroke: 1px var(--black);
+    text-shadow: 3px 3px 0 var(--black);
+  }
+}
