@@ -30,30 +30,6 @@ body {
 }
 
 /* ==============================
-   Floating Background Elements
-============================== */
-.floaters {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
-
-.floater {
-  position: absolute;
-  opacity: 0.12;
-  animation: floatUp linear infinite;
-  user-select: none;
-  line-height: 1;
-}
-
-@keyframes floatUp {
-  from { transform: translateY(110vh) rotate(0deg);   }
-  to   { transform: translateY(-15vh) rotate(720deg); }
-}
-
-/* ==============================
    Hero
 ============================== */
 .hero {
@@ -97,28 +73,6 @@ body {
 
 .hero-inner { position: relative; max-width: 700px; }
 
-.hero-melon {
-  display: block;
-  font-size: clamp(5rem, 18vw, 9rem);
-  margin-bottom: 1rem;
-  animation: wobble 3s ease-in-out infinite;
-  cursor: default;
-}
-
-@keyframes wobble {
-  0%, 100% { transform: rotate(-5deg) scale(1);    }
-  30%       { transform: rotate(4deg) scale(1.08);  }
-  60%       { transform: rotate(-3deg) scale(1.04); }
-}
-
-.hero-melon.pop { animation: pop 0.35s ease forwards; }
-
-@keyframes pop {
-  0%   { transform: scale(1) rotate(0deg);     }
-  50%  { transform: scale(1.4) rotate(18deg);  }
-  100% { transform: scale(1) rotate(0deg);     }
-}
-
 .hero h1 {
   font-family: 'Fredoka One', Impact, sans-serif;
   font-size: clamp(3.2rem, 12vw, 7rem);
@@ -129,6 +83,30 @@ body {
   line-height: 1.0;
   margin-bottom: 2rem;
   letter-spacing: 1px;
+}
+
+span.h-pink-dark {
+  font-family: 'Fredoka One', Impact, sans-serif;
+  color: var(--pink-dark);
+  text-shadow: 1px 1px 0 var(--black);
+}
+
+span.h-pink {
+  font-family: 'Fredoka One', Impact, sans-serif;
+  color: var(--pink);
+  text-shadow: 1px 1px 0 var(--black);
+}
+
+span.h-green {
+  font-family: 'Fredoka One', Impact, sans-serif;
+  color: var(--green-dark);
+  text-shadow: 1px 1px 0 var(--yellow);
+}
+
+span.h-black {
+  font-family: 'Fredoka One', Impact, sans-serif;
+  color: var(--black);
+  text-shadow: 1px 1px 0 var(--pink);
 }
 
 .hero-details {
@@ -217,21 +195,6 @@ body {
   align-items: center;
 }
 
-.melon-svg {
-  width: 100%;
-  max-width: 420px;
-  filter: drop-shadow(5px 5px 0 var(--black));
-  transition: transform 0.25s ease, filter 0.25s ease;
-}
-
-.melon-svg:hover {
-  filter: drop-shadow(7px 7px 0 var(--black));
-  transform: scale(1.05) rotate(2deg);
-}
-
-.melon-svg--flip            { transform: scaleX(-1); }
-.melon-svg--flip:hover      { transform: scaleX(-1) scale(1.05) rotate(-2deg); }
-
 /* ==============================
    FAQ
 ============================== */
@@ -272,6 +235,10 @@ body {
   transition: box-shadow 0.15s, transform 0.15s;
 }
 
+.faq-item .faq-item {
+  margin: 1rem;
+}
+
 .faq-item[open] {
   box-shadow: 6px 6px 0 var(--black);
   transform: translate(-1px, -1px);
@@ -307,6 +274,10 @@ body {
 
 .faq-item[open] .faq-q::after { transform: rotate(45deg); }
 
+.faq-a {
+  padding-bottom: 1rem;
+}
+
 .faq-a p {
   padding: 0.75rem 1.4rem 1.2rem;
   font-size: 1rem;
@@ -329,10 +300,10 @@ footer {
 }
 
 .footer-emoji {
-  display: block;
+  display: inline-block;
   font-size: 3.5rem;
   margin-bottom: 1.25rem;
-  animation: spin 7s linear infinite;
+  animation: spin 5s linear infinite;
 }
 
 @keyframes spin { to { transform: rotate(360deg); } }
@@ -346,19 +317,19 @@ footer p {
   text-shadow: 2px 2px 0 var(--green-dark);
 }
 
-.footer-details {
-  font-size: 0.9rem;
-  font-weight: 600;
-  opacity: 0.6;
-  letter-spacing: 0.1em;
-  color: var(--white);
-  text-shadow: none;
-  margin-top: 0.75rem;
+img.flip {
+  transform: scaleX(-1);
 }
 
-/* ==============================
-   Responsive
-============================== */
+.hero img {
+  max-width: 20rem;
+}
+
+.hero-imgs {
+  display: flex;
+  align-content: center;
+}
+
 @media (max-width: 780px) {
   .split {
     grid-template-columns: 1fr;
@@ -375,5 +346,13 @@ footer p {
   .hero h1 {
     -webkit-text-stroke: 1px var(--black);
     text-shadow: 3px 3px 0 var(--black);
+  }
+
+  .hero-inner .imgs {
+    max-width: 280px;
+  }
+
+  .h-watermelon {
+    display: none;
   }
 }
